@@ -1,0 +1,13 @@
+- name: install and enable nginx
+  hosts: all # all means all servers in the inventory file
+  become: yes  # get sudo or root access  
+  tasks:
+  - name: instll nginx
+    ansible.builtin.module: # module used for install package
+      name: nginx
+      state: present # present means installed, absent means uninstalled
+  - name: start the service
+    ansible.builtin.service: # module for starting the service
+      name: nginx
+      state: started
+      enabled: yes # service will start automatically when server reboots
